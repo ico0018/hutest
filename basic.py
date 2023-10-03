@@ -86,15 +86,78 @@ str = str.fill('*', 6, 11)  # 将索引6到11之间的部分替换为星号
 
 
 ## 字典处理
-# 1， 遍历字典
-dic = {'a': 1, 'b': 2, 'c': 3}
-for key, value in dic.items():
-    print(key, value)
+# 1 - 1, 字典创建
+dic1 = {}
+keys = ['a', 'c', 'b']
+values = [1, 3, 2]
+
+for i in range(len(keys)):
+    dic1[keys[i]] = values[i]
+
+# 遍历 1- 1：
+for k, v in dic1.items():
+    print(k, v)
+# output: a 1, c 3, b 2
+
+# 根据key值排列 1 - 1
+dic1_sorted = sorted(dic1.items(), key=lambda x: x[0])
+# print dic1_sorted 后的key，value值
+for sk, v in dic1_sorted:
+    print(sk, v)
 # output: a 1, b 2, c 3
-# 2， 字典排序
-dic = {'a': 1, 'c': 3, 'b': 2}
-sorted(dic.items(), key=lambda x: x[0])
-# output: [('a', 1), ('b', 2), ('c', 3)]
+
+# 根据value值排列 1 - 1
+dic1_sorted = sorted(dic1.items(), key=lambda x: x[1])
+# print dic1_sorted 后的key，value值
+for k, sv in dic1_sorted:
+    print(k, sv)
+# output: a 1, b 2, c 3
+
+# 1 - 2, 字典创建 - value为list
+dic2 = {}
+keys = ['a', 'b', 'c']
+value_1 = [1, 2, 3]
+value_2 = [-1, -2, -3]
+
+for i in range(len(keys)):
+    dic2[keys[i]] = [value_1[i], value_2[i]]
+
+# 遍历 1 - 2：
+for k, v in dic2.items():
+    print(k, v[0], v[1])
+# output: a 1 -1, b 2 -2, c 3 -3
+
+# 根据key值排列 1 - 2
+dic2_sorted = sorted(dic2.items(), key=lambda x: x[0])
+# 根据value[0]的值排列 1 - 2
+dic2_sorted = sorted(dic2.items(), key=lambda x: x[1][0])
+# 根据value[1]的值排列 1 - 2
+dic2_sorted = sorted(dic2.items(), key=lambda x: x[1][1])
+# 优先根据value[0]值排列，value[0]相同的情况下，根据value[1]值排列 1 - 2
+dic2_sorted = sorted(dic2.items(), key=lambda x: (x[1][0], x[1][1]))
+
+# 1 - 3, 字典创建 - value为结构体
+dic3 = {}
+keys = ['a', 'b', 'c']
+value_1 = [1, 2, 3]
+value_2 = [-1, -2, -3]
+
+for i in range(len(keys)):
+    dic3[keys[i]] = {'value_1': value_1[i], 'value_2': value_2[i]}
+
+# 遍历 1 - 3：
+for k, v in dic3.items():
+    print(k, v['value_1'], v['value_2'])
+# output: a 1 -1, b 2 -2, c 3 -3
+
+# 根据key值排列 1 - 3
+dic3_sorted = sorted(dic3.items(), key=lambda x: x[0])
+# 根据value['value_1']的值排列 1 - 3
+dic3_sorted = sorted(dic3.items(), key=lambda x: x[1]['value_1'])
+# 根据value['value_2']的值排列 1 - 3
+dic3_sorted = sorted(dic3.items(), key=lambda x: x[1]['value_2'])
+# 优先根据value['value_1']值排列，value['value_1']相同的情况下，根据value['value_2']值排列 1 - 3
+dic3_sorted = sorted(dic3.items(), key=lambda x: (x[1]['value_1'], x[1]['value_2']))
 
 ## 矩阵处理
 # 1， 矩阵转置
